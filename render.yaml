@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: notes-pyq
+    env: python
+    plan: free
+    rootDir: notes_pyq
+    buildCommand: "bash build.sh"
+    startCommand: "gunicorn notes_pyq.wsgi:application"
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CSRF_TRUSTED_ORIGINS
+        value: "https://*.onrender.com"
+      - key: PYTHON_VERSION
+        value: "3.12.4"
