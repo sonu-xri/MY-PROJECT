@@ -376,12 +376,12 @@
     <p>{{ r.description }}</p>
     <p>Format: {{ r.file.name|slice:"-4:"|upper }}</p>
 
-    {% comment %} <a href="https://docs.google.com/gview?url={{ request.build_absolute_uri(n.file.url) }}&embedded=true" target="_blank">
+    {% comment %} <a href="https://docs.google.com/gview?url={{ request.build_absolute_uri(r.file.url) }}&embedded=true" target="_blank">
     📄 View File
 </a> {% endcomment %}
      {% if user.is_authenticated %}
             <!-- Logged in user -->
-            <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ n.file.url }}&embedded=true" target="_blank">
+            <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ r.file.url }}&embedded=true" target="_blank">
                 👁 View
             </a>
             <a href="{{ r.file.url }}" download>⬇ Download</a>
