@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>KnowledgeHub | Notes & PYQ Sharing Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.96) 0%, rgba(118, 75, 162, 0.96) 100%);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .logo span {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-nav {
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .btn-signup {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid white;
+        }
+
+        .btn-signup:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+        }
+
+        .btn-logout {
+            background: #ff4757;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            background: #e03a4a;
+            transform: translateY(-2px);
+        }
+
+         /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        /* Main container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+        
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: rgba(255,255,255,0.96);
+            border-radius: 32px;
+            margin: 2rem 0 2.5rem 0;
+            animation: fadeInUp 0.7s ease;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #334155;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* COURSE GRID — more detailed notes & PYQ info */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 2.5rem 0 1.5rem 0;
+            text-align: center;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            letter-spacing: -0.3px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #f1f5f9;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: rgba(255,255,255,0.97);
+            border-radius: 28px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 40px -12px rgba(0,0,0,0.35);
+        }
+
+        .card-header {
+            background: linear-gradient(120deg, #667eea, #764ba2);
+            padding: 1.2rem 1.5rem;
+            color: white;
+        }
+
+        .card-header h3 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .notes-list, .pyq-list {
+            margin: 1rem 0;
+            padding-left: 1.2rem;
+        }
+
+        .notes-list li, .pyq-list li {
+            margin: 0.6rem 0;
+            color: #1e293b;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        .badge {
+            background: #eef2ff;
+            color: #4f46e5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .resource-tag {
+            display: inline-block;
+            background: #f1f5f9;
+            border-radius: 20px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+            color: #334155;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.96);
+            padding: 2rem;
+            border-radius: 28px;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* features row */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0 2rem;
+        }
+
+        /* footer extended */
+        footer {
+            background: #0f172ad9;
+            backdrop-filter: blur(10px);
+            color: #e2e8f0;
+            text-align: center;
+            padding: 2rem 1.5rem 1.8rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        hr {
+            width: 80px;
+            margin: 1rem auto;
+            border-color: #475569;
+        }
+
+        @media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+        .mock-btn {
+            background: #eef2ff;
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #4338ca;
+        }
+
+        .inline-icon {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>📚</span>
+            <h2>NOTES & PYQ SHARING</h2>
+        </div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        
+         <div class="nav-links" id="navLinks">
+        <a href="{% url 'home' %}">🏡Home</a>
+        <a href="{% url 'button' %}">📤 Upload</a>
+        <a href="{% url 'notespage' %}">🔽 Download</a>
+        <a href="{% url 'student' %}"> 👩‍🎓Student</a>
+        <a href="{% url 'teacher' %}"> 👩‍🏫Teacher</a>
+         </div>
+    
+    <div class="auth-buttons">
+    {% if user.is_authenticated %}
+        <div class="user-menu">
+            <a href="{% url 'profile' %}" class="user-name">
+                👤 {{ user.username }}
+            </a>
+            <a href="{% url 'logout' %}" class="btn-logout">🚪 Logout</a>
+        </div>
+    </div>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn-nav btn-login">🔑 Login</a>
+            <a href="{% url 'signup' %}" class="btn-nav btn-signup">📝 Signup</a>
+        {% endif %}
+
+        
+        </div>
+    </div>
+    </nav>
+    <div class="container">
+        <!-- demo message area (optional) -->
+        <div class="messages" id="messageArea"></div>
+
+        <div class="hero">
+            <h1>🎓Welcome to Notes & PYQ Sharing  📖</h1>
+            <p>Access the largest collection of handwritten notes, semester PYQs, and expert-curated resources. Ace your exams with real student contributions.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <span class="mock-btn">✨ 10,000+ Resources</span>
+                <span class="mock-btn">📚 40+ Subjects</span>
+                <span class="mock-btn">🎯 6+ Universities</span>
+            </div>
+        </div>
+
+        <!-- ========== DETAILED COURSES WITH NOTES & PYQ INFO ========== -->
+        <h2 class="section-title">📘 Explore Course Notes & Question Papers</h2>
+        <div class="courses-grid">
+            
+            <!-- Computer Science Engineering -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>💻 Computer Science & Engg.</h3>
+                </div>
+                <div class="card-body">
+                    <div><strong>📄 Semester Notes:</strong></div>
+                    <ul class="notes-list">
+                        <li>📘 DSA (Complete 8 units) <span class="badge">PDF</span></li>
+                        <li>📙 Operating System – Process & Memory Mgmt <span class="badge">Handwritten</span></li>
+                        <li>📗 DBMS – SQL + Normalization Notes <span class="badge">Latest</span></li>
+                        <li>⚙️ Computer Networks (TCP/IP, Routing) <span class="badge">2026 Edition</span></li>
+                    </ul>
+                    <div><strong>📝 Previous Year QP (PYQ):</strong></div>
+                    <ul class="pyq-list">
+                        <li>📌 2023 & 2024 End Sem Papers (Solved)</li>
+                        <li>📌 GATE CSE Topic-wise PYQ</li>
+                        <li>📌 Mid Sem + Quiz Question Bank</li>
+                    </ul>
+                    <div class="resource-tag">📎 32 resources • Updated weekly</div>
+                </div>
+            </div>
+
+            <!-- Electronics & Communication -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>📡 Electronics & Communication</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="notes-list">
+                        <li>🔌 Analog Circuits (Op-Amp, Filters)</li>
+                        <li>📡 Signals & Systems – Fourier/Laplace notes</li>
+                        <li>📡 Digital Communication (Modulation, Coding)</li>
+                        <li>⚡ Microprocessor 8085 & 8086 architecture</li>
+                    </ul>
+                    <div><strong>📝 PYQ Bank:</strong></div>
+                    <ul class="pyq-list">
+                        <li>🎓 EC-303 (2021-2024 solved)</li>
+                        <li>🎓 University Exam Papers: EDC + Communication</li>
+                        <li>🎓 Lab viva + question sets</li>
+                    </ul>
+                    <div class="resource-tag">📁 24 PYQ sets + formula sheets</div>
+                </div>
+            </div>
+
+            <!-- Mechanical Engineering -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>⚙️ Mechanical Engineering</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="notes-list">
+                        <li>🔧 Thermodynamics (Laws, Cycles, Problems)</li>
+                        <li>🔩 Fluid Mechanics & Machinery notes</li>
+                        <li>🛠️ Strength of Materials (SOM) – full derivations</li>
+                        <li>🏭 Manufacturing Processes + CAD/CAM basics</li>
+                    </ul>
+                    <div><strong>📝 PYQ Collection:</strong></div>
+                    <ul class="pyq-list">
+                        <li>📖 ME Sem-5 & Sem-6 (2019-2024)</li>
+                        <li>📖 GATE Mechanical PYQ (Topicwise)</li>
+                        <li>📖 Design of Machine Elements question papers</li>
+                    </ul>
+                    <div class="resource-tag">📌 40+ PDFs including solved examples</div>
+                </div>
+            </div>
+
+            <!-- Civil Engineering -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>🏗️ Civil Engineering</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="notes-list">
+                        <li>📐 Building Materials & Construction Tech</li>
+                        <li>📏 Structural Analysis (Moment distribution)</li>
+                        <li>🌊 Geotechnical Engineering (Soil Mech)</li>
+                        <li>📊 Surveying & Levelling complete notes</li>
+                    </ul>
+                    <div><strong>📝 PYQ Repository:</strong></div>
+                    <ul class="pyq-list">
+                        <li>🏛️ RCC Design (Past 5 years papers)</li>
+                        <li>🧱 Environmental Engg – water & waste water</li>
+                        <li>🏗️ Estimation & Costing PYQ with solutions</li>
+                    </ul>
+                    <div class="resource-tag">📚 28 PYQ + semester notes bundle</div>
+                </div>
+            </div>
+
+            <!-- Business Administration (MBA) -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>📊 Business Administration (BBA/MBA)</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="notes-list">
+                        <li>📈 Principles of Management & OB</li>
+                        <li>💰 Financial Accounting & Costing notes</li>
+                        <li>📊 Marketing Management (Case studies)</li>
+                        <li>📉 Business Statistics & Research methods</li>
+                    </ul>
+                    <div><strong>📝 PYQ & Exam guides:</strong></div>
+                    <ul class="pyq-list">
+                        <li>🏢 University MBA Sem-1 to Sem-4 Papers</li>
+                        <li>📑 Business Environment & Law PYQ</li>
+                        <li>📊 Quantitative Techniques solved papers</li>
+                    </ul>
+                    <div class="resource-tag">📌 Includes project reports & templates</div>
+                </div>
+            </div>
+
+            <!-- Data Science & AI -->
+            <div class="course-card">
+                <div class="card-header">
+                    <h3>🤖 Data Science & AI</h3>
+                </div>
+                <div class="card-body">
+                    <ul class="notes-list">
+                        <li>🐍 Python for Data Analysis (NumPy, Pandas)</li>
+                        <li>🧠 Machine Learning Algorithms (Regression, SVM)</li>
+                        <li>📊 Deep Learning (CNN, RNN) notes</li>
+                        <li>📈 Big Data & Hadoop fundamentals</li>
+                    </ul>
+                    <div><strong>📝 PYQ & Interview Qs:</strong></div>
+                    <ul class="pyq-list">
+                        <li>🎯 ML/DL previous year theory + coding</li>
+                        <li>📌 Statistics for DS – university question banks</li>
+                        <li>📁 Capstone project reports & case studies</li>
+                    </ul>
+                    <div class="resource-tag">✨ 50+ Jupyter notebooks + PYQ PDFs</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- quick stats and info bar (no button, just information) -->
+        <div style="background: rgba(0,0,0,0.55); backdrop-filter: blur(6px); border-radius: 48px; padding: 1rem 1.8rem; margin: 2rem 0; text-align: center; color: white;">
+            <p style="font-size: 1rem;">⭐ Trusted by 25,000+ students • Daily updated notes & solved PYQs • Completely student-driven knowledge hub ⭐</p>
+        </div>
+
+        <!-- extra description about uploads/downloads (static) -->
+        <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;">
+            <div style="background: #f8fafc; padding: 0.8rem 1.8rem; border-radius: 60px; font-weight: 500; color:#1e293b;"><a href="{% url 'button' %}">📤 Upload your notes -free</a></div>
+            <div style="background: #f8fafc; padding: 0.8rem 1.8rem; border-radius: 60px; font-weight: 500; color:#1e293b;"><a href="{% url 'notespage' %}">🔽 Download any PYQ – zero cost</a></div>
+            {% comment %} <div style="background: #f8fafc; padding: 0.8rem 1.8rem; border-radius: 60px; font-weight: 500; color:#1e293b;"><a href="{% url 'request' %}">📢 Request specific question papers</a></div> {% endcomment %}
+        </div>
+    </div>
+
+    <!-- Footer with two links: Help & Contact (no other action buttons) -->
+    <footer>
+        <div class="footer-links">
+            <a href="{% url 'help' %}">🆘 Help Center</a>
+            <a href="{% url 'contact' %}">📧 Contact Us</a>
+        </div>
+        <hr>
+        <p>📚 NOTES & PYQ SHARING – Your Knowledge Hub | © 2026 All Rights Reserved</p>
+        <p style="margin-top: 0.6rem; font-size: 0.85rem; opacity: 0.8;">✨ "Empowering education through shared wisdom" ✨</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>   
+
+</body>
+</html>

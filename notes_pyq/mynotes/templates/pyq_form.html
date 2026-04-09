@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PYQ - NOTES & PYQ SHARING</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h2 {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo span {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-nav {
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .btn-signup {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+
+        .btn-signup:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-name {
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout {
+            background: #ff4757;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-logout:hover {
+            background: #ff3838;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+        
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h2 {
+            color: #f093fb;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #666;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #f093fb;
+            box-shadow: 0 0 0 3px rgba(240, 147, 251, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-input {
+            padding: 10px;
+            background: #f7f9fc;
+            border: 2px dashed #f093fb;
+        }
+
+        .file-input:hover {
+            background: #fef3ff;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(240, 147, 251, 0.3);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 10px 20px;
+            background: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .messages {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .required-field::after {
+            content: " *";
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+
+            .container {
+                padding: 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span>📚</span>
+            <h2>PYQ Share</h2>
+        </div>
+        
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        
+        <div class="nav-links" id="navLinks">
+            <a href="{% url 'home' %}">🏡 Home</a>
+            <a href="{% url 'button' %}" class="active">📤 Upload</a>
+            <a href="{% url 'notespage' %}">🔽 Download</a>
+            <a href="{% url 'student' %}">👩‍🎓 Student</a>
+            <a href="{% url 'teacher' %}">👩‍🏫 Teacher</a>
+        </div>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <div class="user-menu">
+                        <span class="user-name">👤 {{ user.username }}</span>
+                        <a href="{% url 'logout' %}" class="btn-logout">🚪 Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-nav btn-login">🔑 Login</a>
+                    <a href="{% url 'signup' %}" class="btn-nav btn-signup">📝 Signup</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <div class="form-header">
+                <h2>📜 Upload Previous Year Question Papers (PYQ)</h2>
+                <p>Help students prepare for exams by sharing past question papers</p>
+            </div>
+            
+            <form method="POST" enctype="multipart/form-data" id="uploadForm">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="title" class="required-field">📌 Paper Title</label>
+                    <input type="text" id="title" name="title" required placeholder="e.g., B.Sc Mathematics 2023 Question Paper">
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject" class="required-field">📚 Subject/Course</label>
+                    <input type="text" id="subject" name="subject" required placeholder="e.g., Mathematics, Physics, Computer Science">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exam_year" class="required-field">📅 Exam Year</label>
+                    <select id="exam_year" name="exam_year" required>
+                        <option value="">Select Year</option>
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="semester">🎓 Semester/Year</label>
+                    <select id="semester" name="semester">
+                        <option value="">Select Semester/Year</option>
+                        <option value="Semester 1">Semester 1</option>
+                        <option value="Semester 2">Semester 2</option>
+                        <option value="Semester 3">Semester 3</option>
+                        <option value="Semester 4">Semester 4</option>
+                        <option value="Semester 5">Semester 5</option>
+                        <option value="Semester 6">Semester 6</option>
+                        <option value="Semester 7">Semester 7</option>
+                        <option value="Semester 8">Semester 8</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">🏷️ Category</label>
+                    <select id="category" name="category" required>
+                    <option value="PYQ">📄 PYQ</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exam_type">📝 Exam Type</label>
+                    <select id="exam_type" name="exam_type">
+                        <option value="">Select Exam Type</option>
+                        <option value="Internal Exam">Internal Exam</option>
+                        <option value="Semester Exam">Semester Exam</option>
+                        <option value="Final Exam">Final Exam</option>
+                        <option value="Model Exam">Model Exam</option>
+                        <option value="Practice Test">Practice Test</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="description">📄 Description</label>
+                    <textarea id="description" name="description" placeholder="Add any additional information about this question paper..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="file" class="required-field">📎 Upload File</label>
+                    <input type="file" id="file" name="file" class="file-input" accept=" pdf, doc, docx, wordfile" required>
+                    <small style="color: #666; display: block; margin-top: 5px;">Supported formats: pdf, docx, pptx, word, excel, ppt (Max size: 100MB)</small>
+                </div>
+                
+                <button type="submit" class="btn-submit" id="submitBtn">
+                    <span id="btnText">Upload PYQ 📤</span>
+                    <span id="btnLoading" style="display: none;">Uploading... ⏳</span>
+                </button>
+                <a href="{% url 'button' %}" class="btn-back">← Back to Upload Options</a>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer with two links: Help & Contact (no other action buttons) -->
+    <footer>
+        <div class="footer-links">
+            <a href="{% url 'help' %}">🆘 Help Center</a>
+            <a href="{% url 'contact' %}">📧 Contact Us</a>
+        </div>
+        <hr>
+        <p>📚 NOTES & PYQ SHARING – Your Knowledge Hub | © 2026 All Rights Reserved</p>
+        <p style="margin-top: 0.6rem; font-size: 0.85rem; opacity: 0.8;">✨ "Empowering education through shared wisdom" ✨</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Form validation and loading state
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+            
+            // Check if file is selected
+            if (!file) {
+                e.preventDefault();
+                alert('Please select a file to upload.');
+                return false;
+            }
+            
+            // Check file size (100MB = 104857600 bytes)
+            const maxSize = 100 * 1024 * 1024;
+            if (file.size > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds 100MB limit. Please choose a smaller file.');
+                return false;
+            }
+            
+            // Check file extension
+            const allowedExtensions = ['pdf', 'doc', 'docx', 'pptx', 'xls', 'xlsx', 'ppt'];
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            if (!allowedExtensions.includes(fileExtension)) {
+                e.preventDefault();
+                alert('File type not supported. Please upload PDF, DOC, DOCX, PPTX, XLS, XLSX, or PPT files.');
+                return false;
+            }
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            submitBtn.disabled = true;
+            
+            return true;
+        });
+    </script>
+</body>
+</html>
