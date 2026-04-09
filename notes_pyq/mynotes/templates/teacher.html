@@ -556,12 +556,12 @@
                     <p>Format: {{ r.file.name|slice:"-4:"|upper }}</p>
 
                     {% if user.is_authenticated %}
-                        <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ r.file.url }}&embedded=true" target="_blank">
+                    <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ r.file.url }}&embedded=true" target="_blank">
                         👁 View
                     </a>
                         <a href="{{ r.file.url }}" download>⬇ Download</a>
                     {% else %}
-                        <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ r.file.url }}&embedded=true" target="_blank">
+                    <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ r.file.url }}&embedded=true" target="_blank">
                         👁 View
                     </a>
                         <a href="{% url 'login' %}?next={{ r.file.url }}">⬇ Download</a>
