@@ -549,7 +549,7 @@
                     </a>
                         <a href="{{ n.file.url }}" download>⬇ Download</a>
                     {% else %}
-                        <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ n.file.url }}&embedded=true" target="_blank">
+                        <a href="{% url 'login' %}?next={{ n.file.url }}">
                         👁 View
                     </a>
                         <a href="{% url 'login' %}?next={{ n.file.url }}">⬇ Download</a>
