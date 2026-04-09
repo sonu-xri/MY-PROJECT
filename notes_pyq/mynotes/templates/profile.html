@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
     <title>Profile Hub | Notes & PYQ Sharing</title>
     <!-- Bootstrap 5 CSS + Icons + Font Awesome -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts (Poppins) -->
+    <!-- Google Fonts (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -36,6 +36,7 @@
             top: 0;
             z-index: 1000;
             animation: slideDown 0.5s ease;
+            flex-wrap: wrap;
         }
 
         @keyframes slideDown {
@@ -67,6 +68,7 @@
             display: flex;
             gap: 2rem;
             align-items: center;
+            transition: all 0.4s ease;
         }
 
         .nav-links a {
@@ -90,6 +92,7 @@
         .auth-buttons {
             display: flex;
             gap: 1rem;
+            align-items: center;
         }
 
         .btn-nav {
@@ -155,16 +158,23 @@
         }
 
         .btn-logout:hover {
-            background: #ff3838;
+            background: rgb(25, 23, 165);
             transform: translateY(-2px);
         }
 
-        /* Mobile Menu */
+        /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: white;
             cursor: pointer;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            transition: 0.2s;
+        }
+        .menu-toggle:hover {
+            background: rgba(255,255,255,0.35);
         }
 
         .profile-wrapper {
@@ -255,29 +265,133 @@
             z-index: 1090;
             min-width: 260px;
         }
-         @media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        flex-direction: column;
-        padding: 1rem;
-        gap: 1rem;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-}
-
+        .btn-outline-icon {
+            border-radius: 40px;
+            padding: 6px 18px;
+        }
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        hr {
+            margin: 1rem auto;
+            width: 80%;
+            border-color: #444;
+        }
+        
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .btn-nav, .btn-logout {
+                padding: 0.4rem 1rem;
+            }
+        }
+        
         @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 85%;
+                max-width: 320px;
+                height: calc(100vh - 70px);
+                background: linear-gradient(145deg, rgba(30, 40, 80, 0.98) 0%, rgba(20, 25, 55, 0.98) 100%);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: 0.5rem;
+                padding: 2rem 1.5rem;
+                transition: left 0.35s ease-in-out;
+                z-index: 999;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+                border-radius: 0 20px 20px 0;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                left: 0;
+                display: flex;
+            }
+
+            .nav-links a {
+                width: 100%;
+                padding: 0.8rem 1rem;
+                font-size: 1.1rem;
+                border-radius: 12px;
+                background: rgba(255,255,255,0.05);
+                margin: 0.2rem 0;
+            }
+
+            .nav-links a:hover {
+                background: rgba(255,255,255,0.2);
+                transform: translateX(5px);
+            }
+
+            .auth-buttons {
+                width: 100%;
+                flex-direction: column;
+                margin-top: 0.8rem;
+                gap: 0.8rem;
+                border-top: 1px solid rgba(255,255,255,0.2);
+                padding-top: 1rem;
+            }
+
+            .user-menu {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 0.8rem;
+            }
+
+            .user-name {
+                background: rgba(255,255,255,0.1);
+                padding: 0.7rem 1rem;
+                border-radius: 30px;
+                justify-content: center;
+            }
+
+            .btn-logout, .btn-login, .btn-signup {
+                justify-content: center;
+                width: 100%;
+                text-align: center;
+            }
+            /* Ensure logout button appears inside menu under all navbar buttons */
+            .nav-links .auth-buttons .btn-logout {
+                background: rgb(25, 23, 165);
+                color: white;
+                margin-top: 0;
+            }
+            
             .profile-header-flex {
                 flex-direction: column;
                 text-align: center;
@@ -290,16 +404,32 @@
             .stat-badge {
                 font-size: 0.75rem;
             }
+            .logo h2 {
+                font-size: 1.1rem;
+            }
+            .logo span {
+                font-size: 1.6rem;
+            }
         }
-        .btn-outline-icon {
-            border-radius: 40px;
-            padding: 6px 18px;
-        }
-        footer {
-            font-size: 0.8rem;
-            text-align: center;
-            margin-top: 3rem;
-            color: #6c757d;
+        
+        @media (max-width: 480px) {
+            .logo h2 {
+                font-size: 0.9rem;
+            }
+            .logo span {
+                font-size: 1.4rem;
+            }
+            .menu-toggle {
+                font-size: 1.5rem;
+                padding: 0.2rem 0.6rem;
+            }
+            footer {
+                padding: 1.2rem;
+                font-size: 0.8rem;
+            }
+            .footer-links {
+                gap: 1rem;
+            }
         }
     </style>
 </head>
@@ -313,64 +443,54 @@
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         
         <div class="nav-links" id="navLinks">
-        <a href="{% url 'home' %}">🏡Home</a>
-        <a href="{% url 'button' %}">📤 Upload</a>
-        <a href="{% url 'notespage' %}">🔽 Download</a>
-        <a href="{% url 'student' %}"> 👩‍🎓Student</a>
-        <a href="{% url 'teacher' %}"> 👩‍🏫Teacher</a>
+            <a href="{% url 'home' %}">🏡 Home</a>
+            <a href="{% url 'button' %}">📤 Upload</a>
+            <a href="{% url 'notespage' %}">🔽 Download</a>
+            <a href="{% url 'student' %}">👩‍🎓 Student</a>
+            <a href="{% url 'teacher' %}">👩‍🏫 Teacher</a>
+        
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <div class="user-menu">
+                        <a href="{% url 'profile' %}" class="user-name">
+                            👤 {{ user.username }}
+                        </a>
+                        <a href="{% url 'logout' %}" class="btn-logout">🚪 Logout</a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-nav btn-login">🔑 Login</a>
+                    <a href="{% url 'signup' %}" class="btn-nav btn-signup">📝 Signup</a>
+                {% endif %}
+            </div>
         </div>
-    <div class="auth-buttons">
-    {% if user.is_authenticated %}
-        <div class="user-menu">
-            <a href="{% url 'profile' %}" class="user-name">
-                👤 {{ user.username }}
-            </a>
-            <a href="{% url 'logout' %}" class="btn-logout">🚪 Logout</a>
-        </div>
-    </div>
-        {% else %}
-            <a href="{% url 'login' %}" class="btn-nav btn-login">🔑 Login</a>
-            <a href="{% url 'signup' %}" class="btn-nav btn-signup">📝 Signup</a>
-        {% endif %}
-        </div>
-    </div>
     </nav>
 
-
-<div class="profile-wrapper">
-    <!-- Django CSRF token placeholder - will be used if backend integrated, for demo JS handles mock -->
-    {% csrf_token %}
-    
-    <!-- PROFILE HEADER SECTION -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="card-custom p-4 p-lg-5">
-                <div class="d-flex profile-header-flex align-items-center justify-content-between flex-wrap">
-                    <div class="d-flex align-items-center gap-4 flex-wrap">
-                        <div class="position-relative">
-                            <img id="profileAvatar" src="https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name={{ user.username }}&email={{ user.email }}" alt="User Avatar" class="avatar-large">
-                            <button class="btn btn-sm btn-light rounded-circle position-absolute bottom-0 end-0 shadow-sm" id="changeAvatarBtn" style="width: 36px; height: 36px;"><i class="fas fa-camera"></i></button>
+    <div class="profile-wrapper">
+        <!-- PROFILE HEADER SECTION -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card-custom p-4 p-lg-5">
+                    <div class="d-flex profile-header-flex align-items-center justify-content-between flex-wrap">
+                        <div class="d-flex align-items-center gap-4 flex-wrap">
+                            <div class="position-relative">
+                                <img id="profileAvatar" src="https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name={{ user.username }}&email={{ user.email }}" alt="User Avatar" class="avatar-large">
+                                <button class="btn btn-sm btn-light rounded-circle position-absolute bottom-0 end-0 shadow-sm" id="changeAvatarBtn" style="width: 36px; height: 36px;"><i class="fas fa-camera"></i></button>
+                            </div>
+                            <div>
+                                <h2 class="fw-bold mb-1" id="displayName">{{ user.username }}</h2>
+                                <p class="text-muted mb-2"><i class="fas fa-envelope me-1"></i> {{ user.email }}</p>
+                            </div>
                         </div>
                         <div>
-                            <h2 class="fw-bold mb-1" id="displayName">{{ user.username }}</h2>
-                            <p class="text-muted mb-2"><i class="fas fa-envelope me-1"></i> {{ user.email }}</p>
-                            {% comment %} <div class="mt-2 d-flex flex-wrap gap-2">
-                                <span class="stat-badge"><i class="fas fa-upload me-1"></i> {{ user.get_profile().resources_uploaded }}</span>
-                                <span class="stat-badge"><i class="fas fa-download me-1"></i> {{ user.get_profile().downloads }}</span>
-                                <span class="stat-badge"><i class="fas fa-star me-1"></i> {{ user.get_profile().positive_reviews }}</span> 
-                        </div> {% endcomment %}
-                    </div>
-                    <div class="btn btn-outline-secondary btn-outline-icon" id="editProfileBtn">
-                         <a href="{% url 'button' %}">📤 Share Notes / PYQ</a></i>
-                        <button class="btn btn-outline-secondary btn-outline-icon" id="editProfileBtn"><i class="fas fa-edit me-1"></i> Edit Name</button>
+                            <a href="{% url 'button' %}" class="btn btn-outline-secondary btn-outline-icon"><i class="fas fa-upload me-1"></i> Share Notes / PYQ</a>
+                            <button class="btn btn-outline-secondary btn-outline-icon" id="editProfileBtn"><i class="fas fa-edit me-1"></i> Edit Name</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    
-    <!-- Footer with two links: Help & Contact (no other action buttons) -->
+    <!-- Footer -->
     <footer>
         <div class="footer-links">
             <a href="{% url 'help' %}">🆘 Help Center</a>
@@ -381,319 +501,183 @@
         <p style="margin-top: 0.6rem; font-size: 0.85rem; opacity: 0.8;">✨ "Empowering education through shared wisdom" ✨</p>
     </footer>
 
-</div>
-
-<!-- MODAL: Edit Profile -->
-<div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded-4 border-0 shadow">
-            <div class="modal-header bg-light border-0">
-                <h5 class="modal-title fw-bold">Edit Profile Info</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body p-4">
-                <div class="mb-3">
-                    <label>Full Name</label>
-                    <input type="text" id="editFullName" class="form-control rounded-3" placeholder="Enter name">
+    <!-- MODAL: Edit Profile -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header bg-light border-0">
+                    <h5 class="modal-title fw-bold">Edit Profile Info</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="mb-3">
-                    <label>Email Address</label>
-                    <input type="email" id="editEmail" class="form-control rounded-3" placeholder="email@example.com">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label>Full Name</label>
+                        <input type="text" id="editFullName" class="form-control rounded-3" placeholder="Enter name">
+                    </div>
+                    <div class="mb-3">
+                        <label>Email Address</label>
+                        <input type="email" id="editEmail" class="form-control rounded-3" placeholder="email@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label>Bio / Status</label>
+                        <textarea class="form-control" id="editBio" rows="2" placeholder="Computer Science enthusiast, sharing knowledge!"></textarea>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label>Bio / Status</label>
-                    <textarea class="form-control" id="editBio" rows="2" placeholder="Computer Science enthusiast, sharing knowledge!"></textarea>
+                <div class="modal-footer border-0">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
                 </div>
-            </div>
-            <div class="modal-footer border-0">
-                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="saveProfileBtn">Save Changes</button>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Toast Notification -->
-<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
-    <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
-        <div class="d-flex">
-            <div class="toast-body" id="toastMessage">Action successful!</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    <!-- Toast Notification -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1100;">
+        <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="3000">
+            <div class="d-flex">
+                <div class="toast-body" id="toastMessage">Action successful!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
+            if (navLinks) {
+                navLinks.classList.toggle('active');
+            }
         }
-    </script>
-    // ---------- Mock Data Storage (simulating Django backend) ----------
-    let userProfile = {
-        fullName: "user.username",
-        email: "user.email",
-        bio: "user.bio",
-         resources_uploaded: 0,
-            downloads: 0,
-            positive_reviews: 0
-    };
-    
-    // Helper functions to render
-    function renderNotes() {
-        const container = document.getElementById('notesListContainer');
-        if (!container) return;
-        if (notesArray.length === 0) {
-            container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm"><i class="fas fa-folder-open fa-3x text-secondary mb-3"></i><p class="text-muted">No notes shared yet. Click "Share Notes / PYQ" to upload!</p></div>`;
-            return;
-        }
-        let html = '';
-        notesArray.forEach(note => {
-            html += `
-                <div class="col-md-6 col-lg-4">
-                    <div class="resource-card p-3 h-100">
-                        <div class="d-flex justify-content-between align-items-start">
-                            <span class="badge-subject"><i class="fas fa-book me-1"></i> ${escapeHtml(note.subject) || 'General'}</span>
-                            <small class="text-muted"><i class="fas fa-download me-1"></i> ${note.downloads}</small>
-                        </div>
-                        <h5 class="fw-bold mt-2">${escapeHtml(note.title)}</h5>
-                        <p class="small text-secondary">${escapeHtml(note.description.substring(0, 80))}${note.description.length > 80 ? '...' : ''}</p>
-                        <div class="d-flex justify-content-between align-items-center mt-2">
-                            <small class="text-muted"><i class="far fa-calendar-alt me-1"></i> ${note.date}</small>
-                            <div>
-                                <button class="btn btn-sm btn-outline-primary rounded-pill download-resource" data-title="${note.title}" data-type="note"><i class="fas fa-download"></i> Mock DL</button>
-                                <button class="btn btn-sm btn-link text-danger save-resource-btn" data-id="${note.id}" data-type="note" data-title="${note.title}"><i class="far fa-heart"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+        
+        document.addEventListener('click', function(event) {
+            const navLinks = document.getElementById('navLinks');
+            const toggleBtn = document.querySelector('.menu-toggle');
+            if (navLinks && navLinks.classList.contains('active')) {
+                if (!navLinks.contains(event.target) && !toggleBtn.contains(event.target)) {
+                    navLinks.classList.remove('active');
+                }
+            }
         });
-        container.innerHTML = html;
-        attachDownloadEvents();
-        attachSaveEvents();
-    }
-    
-    function renderPYQs() {
-        const container = document.getElementById('pyqListContainer');
-        if (!container) return;
-        if (pyqArray.length === 0) {
-            container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4"><i class="fas fa-file-pdf fa-3x text-secondary mb-2"></i><p>No PYQs uploaded yet. Be the first to share!</p></div>`;
-            return;
-        }
-        let html = '';
-        pyqArray.forEach(pyq => {
-            html += `
-                <div class="col-md-6 col-lg-4">
-                    <div class="resource-card p-3 h-100">
-                        <div class="d-flex justify-content-between">
-                            <span class="badge-subject"><i class="fas fa-graduation-cap me-1"></i> PYQ ${pyq.year || ''}</span>
-                            <span class="badge bg-light text-dark">${pyq.downloads} downloads</span>
-                        </div>
-                        <h5 class="fw-bold mt-2">${escapeHtml(pyq.title)}</h5>
-                        <p class="small">${escapeHtml(pyq.description.substring(0, 70))}</p>
-                        <div class="d-flex justify-content-between mt-2">
-                            <small class="text-muted"><i class="fas fa-chalkboard-user me-1"></i> ${escapeHtml(pyq.subject)}</small>
-                            <div>
-                                <button class="btn btn-sm btn-outline-success rounded-pill download-resource" data-title="${pyq.title}" data-type="pyq"><i class="fas fa-download"></i> Get PYQ</button>
-                                <button class="btn btn-sm btn-link save-resource-btn" data-id="${pyq.id}" data-type="pyq" data-title="${pyq.title}"><i class="far fa-save"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-        attachDownloadEvents();
-        attachSaveEvents();
-    }
-    
-    function renderSaved() {
-        const container = document.getElementById('savedListContainer');
-        if (!container) return;
-        if (savedResources.length === 0) {
-            container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4"><i class="far fa-bookmark fa-3x text-secondary"></i><p class="mt-2">No saved resources. Explore and save notes or PYQs!</p></div>`;
-            return;
-        }
-        let html = '';
-        savedResources.forEach(sav => {
-            html += `<div class="col-md-6 col-lg-4">
-                        <div class="resource-card p-3">
-                            <div class="d-flex"><i class="fas ${sav.type === 'note' ? 'fa-sticky-note' : 'fa-file-alt'} me-2 fs-4 text-primary"></i>
-                            <div><h6 class="fw-bold">${escapeHtml(sav.title)}</h6>
-                            <small class="text-muted">by ${escapeHtml(sav.author)} • saved ${sav.savedOn}</small>
-                            <div class="mt-2"><span class="badge bg-secondary">${sav.type.toUpperCase()}</span></div>
-                            </div></div>
-                        </div>
-                    </div>`;
-        });
-        container.innerHTML = html;
-    }
-    
-    function attachDownloadEvents() {
-        document.querySelectorAll('.download-resource').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const title = btn.getAttribute('data-title');
-                showToast(`📥 Downloading "${title}" (demo - resource ready)`, 'success');
-            });
-        });
-    }
-    
-    function attachSaveEvents() {
-        document.querySelectorAll('.save-resource-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = btn.getAttribute('data-id');
-                const type = btn.getAttribute('data-type');
-                const title = btn.getAttribute('data-title');
-                // Avoid duplicate saved items
-                if (!savedResources.some(item => item.title === title && item.type === type)) {
-                    savedResources.unshift({ id: `saved_${Date.now()}`, title: title, author: userProfile.fullName, type: type, savedOn: new Date().toISOString().slice(0,10) });
-                    renderSaved();
-                    showToast(`⭐ "${title}" saved to your collection!`, 'success');
-                } else {
-                    showToast(`⚠️ "${title}" already saved.`, 'warning');
+        
+        const allNavLinks = document.querySelectorAll('#navLinks a');
+        allNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.getElementById('navLinks');
+                if (window.innerWidth <= 768 && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
                 }
             });
         });
-    }
-    
-    function showToast(msg, type = 'success') {
-        const toastEl = document.getElementById('liveToast');
-        const toastBody = document.getElementById('toastMessage');
-        toastBody.innerText = msg;
-        if (type === 'warning') {
-            toastEl.classList.remove('text-bg-success');
-            toastEl.classList.add('text-bg-warning');
-        } else {
-            toastEl.classList.remove('text-bg-warning');
-            toastEl.classList.add('text-bg-success');
-        }
-        const bsToast = new bootstrap.Toast(toastEl, { autohide: true, delay: 2500 });
-        bsToast.show();
-        setTimeout(() => {
-            toastEl.classList.add('text-bg-success');
-        }, 2600);
-    }
-    
-    function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
-    
-    // Upload resource handler
-    document.getElementById('resourceForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const resType = document.getElementById('resourceType').value;
-        const title = document.getElementById('resourceTitle').value.trim();
-        const subject = document.getElementById('resourceSubject').value.trim() || "General";
-        const desc = document.getElementById('resourceDesc').value.trim() || "No description";
-        if (!title) {
-            showToast("Please provide a title", "warning");
-            return;
-        }
-        const fileInput = document.getElementById('mockFile');
-        let fileName = fileInput.files[0] ? fileInput.files[0].name : "sample_resource.pdf";
-        const newId = Date.now().toString();
-        const newResource = {
-            id: newId,
-            title: title,
-            subject: subject,
-            description: desc,
-            downloads: 0,
-            date: new Date().toISOString().slice(0,10)
-        };
-        if (resType === 'note') {
-            newResource.type = 'note';
-            notesArray.unshift(newResource);
-            renderNotes();
-            showToast(`✅ Note "${title}" shared successfully!`, 'success');
-        } else {
-            newResource.type = 'pyq';
-            newResource.year = new Date().getFullYear().toString();
-            pyqArray.unshift(newResource);
-            renderPYQs();
-            showToast(`📄 PYQ "${title}" added to community!`, 'success');
-        }
-        // reset form & close modal
-        document.getElementById('resourceForm').reset();
-        bootstrap.Modal.getInstance(document.getElementById('uploadModal')).hide();
-        // update stats: total resources count
-        updateStatsUI();
-    });
-    
-    function updateStatsUI() {
-        const totalResources = notesArray.length + pyqArray.length;
-        const statBadges = document.querySelectorAll('.stat-badge');
-        if (statBadges.length) {
-            statBadges[0].innerHTML = `<i class="fas fa-upload me-1"></i> ${totalResources} Resources`;
-        }
-    }
-    
-    // Edit Profile Modal Handling
-    const editProfileBtn = document.getElementById('editProfileBtn');
-    const editFullName = document.getElementById('editFullName');
-    const editEmail = document.getElementById('editEmail');
-    const editBio = document.getElementById('editBio');
-    const saveProfileBtn = document.getElementById('saveProfileBtn');
-    
-    editProfileBtn?.addEventListener('click', () => {
-        editFullName.value = userProfile.fullName;
-        editEmail.value = userProfile.email;
-        editBio.value = userProfile.bio;
-        const modal = new bootstrap.Modal(document.getElementById('editProfileModal'));
-        modal.show();
-    });
-    
-    saveProfileBtn?.addEventListener('click', () => {
-        const newName = editFullName.value.trim();
-        const newEmail = editEmail.value.trim();
-        const newBio = editBio.value.trim();
-        if (newName) userProfile.fullName = newName;
-        if (newEmail) userProfile.email = newEmail;
-        if (newBio) userProfile.bio = newBio;
-        document.getElementById('displayName').innerText = userProfile.fullName;
-        // Update avatar text if needed (UI)
-        const avatarImg = document.getElementById('profileAvatar');
-        if (avatarImg && newName) {
-            let nameInitial = newName.split(' ')[0];
-            avatarImg.src = `https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name=${encodeURIComponent(newName)}`;
-        }
-        showToast("Profile updated successfully!", "success");
-        bootstrap.Modal.getInstance(document.getElementById('editProfileModal')).hide();
-    });
-    
-    // Change avatar
-    document.getElementById('changeAvatarBtn')?.addEventListener('click', () => {
-        const randomSeed = Math.random().toString(36).substring(7);
-        const nameForAvatar = userProfile.fullName || "User";
-        const newAvatarUrl = `https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name=${encodeURIComponent(nameForAvatar)}&length=2&rounded=true&fontsize=0.55`;
-        document.getElementById('profileAvatar').src = newAvatarUrl;
-        showToast("Avatar updated! (random style)", "success");
-    });
-    
-    // Upload button open modal
-    document.getElementById('uploadResourceBtn')?.addEventListener('click', () => {
-        const modal = new bootstrap.Modal(document.getElementById('uploadModal'));
-        modal.show();
-    });
-    
-    // initial render
-    renderNotes();
-    renderPYQs();
-    renderSaved();
-    updateStatsUI();
-    
-    // Tab sync: when switching, no re-render needed but ensures clean
-    document.querySelectorAll('#resourceTabs button').forEach(tab => {
-        tab.addEventListener('shown.bs.tab', (e) => {
-            if (e.target.id === 'notes-tab') renderNotes();
-            if (e.target.id === 'pyq-tab') renderPYQs();
-            if (e.target.id === 'saved-tab') renderSaved();
+        
+        window.addEventListener('resize', function() {
+            const navLinks = document.getElementById('navLinks');
+            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
         });
-    });
-    
-    // Additional Stats: total downloads counter not needed but optional
-    // Set dummy display stats already
-    console.log("Django-ready profile page with Bootstrap & JS mock backend");
-</script>
+
+        // Mock Data
+        let notesArray = [
+            { id: 1, title: "Complete DSA Notes", subject: "Computer Science", description: "Handwritten notes covering arrays, linked lists, trees, graphs.", downloads: 24, date: "2025-02-10" },
+            { id: 2, title: "Operating System Concepts", subject: "CS", description: "Process scheduling, memory management, file systems.", downloads: 18, date: "2025-01-28" }
+        ];
+        let pyqArray = [
+            { id: 101, title: "DBMS End Sem Paper 2024", subject: "Database", description: "Solved PYQ with answers.", downloads: 42, year: "2024", date: "2025-01-15" }
+        ];
+        let savedResources = [];
+        let userProfile = { fullName: "{{ user.username }}", email: "{{ user.email }}", bio: "Knowledge sharer" };
+
+        function escapeHtml(str) { if(!str) return ''; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+        function showToast(msg, type = 'success') {
+            const toastEl = document.getElementById('liveToast');
+            const toastBody = document.getElementById('toastMessage');
+            toastBody.innerText = msg;
+            if (type === 'warning') {
+                toastEl.classList.remove('text-bg-success');
+                toastEl.classList.add('text-bg-warning');
+            } else {
+                toastEl.classList.remove('text-bg-warning');
+                toastEl.classList.add('text-bg-success');
+            }
+            const bsToast = new bootstrap.Toast(toastEl, { autohide: true, delay: 2500 });
+            bsToast.show();
+            setTimeout(() => { toastEl.classList.add('text-bg-success'); }, 2600);
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notesListContainer');
+            if (!container) return;
+            if (notesArray.length === 0) { container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4 shadow-sm"><i class="fas fa-folder-open fa-3x text-secondary mb-3"></i><p class="text-muted">No notes shared yet. Click "Share Notes / PYQ" to upload!</p></div>`; return; }
+            let html = '';
+            notesArray.forEach(note => {
+                html += `<div class="col-md-6 col-lg-4"><div class="resource-card p-3 h-100"><div class="d-flex justify-content-between align-items-start"><span class="badge-subject"><i class="fas fa-book me-1"></i> ${escapeHtml(note.subject)}</span><small class="text-muted"><i class="fas fa-download me-1"></i> ${note.downloads}</small></div><h5 class="fw-bold mt-2">${escapeHtml(note.title)}</h5><p class="small text-secondary">${escapeHtml(note.description.substring(0, 80))}${note.description.length > 80 ? '...' : ''}</p><div class="d-flex justify-content-between align-items-center mt-2"><small class="text-muted"><i class="far fa-calendar-alt me-1"></i> ${note.date}</small><button class="btn btn-sm btn-outline-primary rounded-pill download-resource" data-title="${note.title}"><i class="fas fa-download"></i> Mock DL</button></div></div></div>`;
+            });
+            container.innerHTML = html;
+            document.querySelectorAll('.download-resource').forEach(btn => {
+                btn.addEventListener('click', (e) => { e.stopPropagation(); showToast(`📥 Downloading "${btn.getAttribute('data-title')}" (demo)`, 'success'); });
+            });
+        }
+
+        function renderPYQs() {
+            const container = document.getElementById('pyqListContainer');
+            if (!container) return;
+            if (pyqArray.length === 0) { container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4"><i class="fas fa-file-pdf fa-3x text-secondary mb-2"></i><p>No PYQs uploaded yet. Be the first to share!</p></div>`; return; }
+            let html = '';
+            pyqArray.forEach(pyq => {
+                html += `<div class="col-md-6 col-lg-4"><div class="resource-card p-3 h-100"><div class="d-flex justify-content-between"><span class="badge-subject"><i class="fas fa-graduation-cap me-1"></i> PYQ ${pyq.year || ''}</span><span class="badge bg-light text-dark">${pyq.downloads} downloads</span></div><h5 class="fw-bold mt-2">${escapeHtml(pyq.title)}</h5><p class="small">${escapeHtml(pyq.description.substring(0, 70))}</p><div class="d-flex justify-content-between mt-2"><small class="text-muted"><i class="fas fa-chalkboard-user me-1"></i> ${escapeHtml(pyq.subject)}</small><button class="btn btn-sm btn-outline-success rounded-pill download-resource" data-title="${pyq.title}"><i class="fas fa-download"></i> Get PYQ</button></div></div></div>`;
+            });
+            container.innerHTML = html;
+            document.querySelectorAll('.download-resource').forEach(btn => {
+                btn.addEventListener('click', (e) => { e.stopPropagation(); showToast(`📥 Downloading "${btn.getAttribute('data-title')}" (demo)`, 'success'); });
+            });
+        }
+
+        function renderSaved() {
+            const container = document.getElementById('savedListContainer');
+            if (!container) return;
+            if (savedResources.length === 0) { container.innerHTML = `<div class="col-12 text-center py-5 bg-white rounded-4"><i class="far fa-bookmark fa-3x text-secondary"></i><p class="mt-2">No saved resources. Explore and save notes or PYQs!</p></div>`; return; }
+            let html = '';
+            savedResources.forEach(sav => {
+                html += `<div class="col-md-6 col-lg-4"><div class="resource-card p-3"><div class="d-flex"><i class="fas ${sav.type === 'note' ? 'fa-sticky-note' : 'fa-file-alt'} me-2 fs-4 text-primary"></i><div><h6 class="fw-bold">${escapeHtml(sav.title)}</h6><small class="text-muted">saved on ${sav.savedOn}</small><div class="mt-2"><span class="badge bg-secondary">${sav.type.toUpperCase()}</span></div></div></div></div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // Edit Profile Modal
+        const editProfileBtn = document.getElementById('editProfileBtn');
+        const editFullName = document.getElementById('editFullName');
+        const editEmail = document.getElementById('editEmail');
+        const editBio = document.getElementById('editBio');
+        const saveProfileBtn = document.getElementById('saveProfileBtn');
+        editProfileBtn?.addEventListener('click', () => {
+            editFullName.value = userProfile.fullName;
+            editEmail.value = userProfile.email;
+            editBio.value = userProfile.bio;
+            new bootstrap.Modal(document.getElementById('editProfileModal')).show();
+        });
+        saveProfileBtn?.addEventListener('click', () => {
+            if (editFullName.value.trim()) userProfile.fullName = editFullName.value.trim();
+            if (editEmail.value.trim()) userProfile.email = editEmail.value.trim();
+            if (editBio.value.trim()) userProfile.bio = editBio.value.trim();
+            document.getElementById('displayName').innerText = userProfile.fullName;
+            document.getElementById('profileAvatar').src = `https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name=${encodeURIComponent(userProfile.fullName)}`;
+            showToast("Profile updated successfully!", "success");
+            bootstrap.Modal.getInstance(document.getElementById('editProfileModal')).hide();
+        });
+        document.getElementById('changeAvatarBtn')?.addEventListener('click', () => {
+            document.getElementById('profileAvatar').src = `https://ui-avatars.com/api/?background=0D6EFD&color=fff&bold=true&size=120&name=${encodeURIComponent(userProfile.fullName)}&length=2&rounded=true`;
+            showToast("Avatar refreshed!", "success");
+        });
+
+        renderNotes(); renderPYQs(); renderSaved();
+        document.querySelectorAll('#resourceTabs button').forEach(tab => {
+            tab.addEventListener('shown.bs.tab', (e) => {
+                if (e.target.id === 'notes-tab') renderNotes();
+                if (e.target.id === 'pyq-tab') renderPYQs();
+                if (e.target.id === 'saved-tab') renderSaved();
+            });
+        });
+    </script>
 </body>
 </html>
