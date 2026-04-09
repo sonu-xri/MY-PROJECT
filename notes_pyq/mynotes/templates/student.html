@@ -397,11 +397,15 @@
        
        {% if user.is_authenticated %}
             <!-- Logged in user -->
-            <a href="https://docs.google.com/gview?url={{ n.file.url }}&embedded=true" target="_blank">👁 View</a>
+            <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ n.file.url }}&embedded=true" target="_blank">
+                👁 View
+            </a>
             <a href="{{ n.file.url }}" download>⬇ Download</a>
         {% else %}
             <!-- Not logged in user -->
-            <a href="https://docs.google.com/gview?url={{ n.file.url }}&embedded=true" target="_blank">👁 View</a>
+            <a href="https://docs.google.com/gview?url={{ request.scheme }}://{{ request.get_host }}{{ n.file.url }}&embedded=true" target="_blank">
+                👁 View
+            </a>
             <a href="{% url 'login' %}?next={{ n.file.url }}">⬇ Download</a>
         {% endif %}
     </div>
